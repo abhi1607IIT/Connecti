@@ -1,0 +1,39 @@
+<li id="post-<%= post.id %>" class="wow animated fadeInUp">
+	<div>
+
+		<p><%= post.content %></p>
+		<p><%= post.user.email %></p>
+		<% if user_signed_in? && post.user_id ==  current_user.id %>
+		<p><%= link_to "Delete", destroy_post_path(post.id), method: :delete, remote: true %></p>
+		<% end %>
+
+		<% if user_signed_in? %>
+		<p>
+			<sub id="post-<%= post.id %>-likes" class="post-like-status">
+				<%= render 'post_like_link', post: post %>
+			</sub>
+		</p>
+		<% else %>
+		<sub>
+				<%= post.likes.length %> Likes
+		
+			</sub>
+
+		<% end %>
+
+		<div>
+			<%= render 'comments/post_comment', post: post %>
+		</div>
+		
+	</div>
+</li>
+
+
+
+
+
+
+
+
+
+
